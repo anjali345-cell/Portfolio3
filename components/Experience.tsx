@@ -13,7 +13,7 @@ const Experience = () => {
     {
       role: 'Frontend Developer Intern',
       company: 'TechCorp Solutions',
-      duration: 'June 2023 - August 2023',
+      duration: 'November 2025 - August 2026',
       description: 'Developed responsive web applications using React and Tailwind CSS. Collaborated with the design team to implement pixel-perfect UI components and improved website performance by 40%.',
       skills: ['React', 'JavaScript', 'Tailwind CSS', 'Git'],
     },

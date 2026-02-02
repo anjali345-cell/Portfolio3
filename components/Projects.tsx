@@ -5,6 +5,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
+import Magnetic from "./ui/magnetic";
 
 const Projects = () => {
   const ref = useRef(null);
@@ -165,17 +166,19 @@ const Projects = () => {
               Want to see more? Check out my GitHub for additional projects and
               contributions.
             </p>
-            <motion.a
-              href="https://github.com/anjali345-cell"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors shadow-lg"
-            >
-              <Github size={20} />
-              View More on GitHub
-            </motion.a>
+            <Magnetic>
+              <motion.a
+                href="https://github.com/anjali345-cell"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors shadow-lg"
+              >
+                <Github size={20} />
+                View More on GitHub
+              </motion.a>
+            </Magnetic>
           </motion.div>
         </motion.div>
       </div>

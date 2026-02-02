@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { motion } from "framer-motion";
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import Magnetic from "./ui/magnetic";
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -13,13 +14,16 @@ const Hero = () => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-blush-50 via-white to-crimson-50 opacity-60"></div>
 
       <div className="absolute top-20 right-10 w-72 h-72 bg-crimson-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
@@ -34,7 +38,7 @@ const Hero = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-6">
-              Hi, I&apos;m{' '}
+              Hi, I&apos;m{" "}
               <span className="text-crimson-600 relative inline-block">
                 Anjali
                 <motion.div
@@ -56,7 +60,8 @@ const Hero = () => {
               Frontend Developer
             </h2>
             <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-              Building clean and elegant web experiences with modern technologies
+              Building clean and elegant web experiences with modern
+              technologies
             </p>
           </motion.div>
 
@@ -66,22 +71,26 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-wrap items-center justify-center gap-4 mb-12"
           >
+            <Magnetic>
+              <motion.button
+                onClick={() => scrollToSection("projects")}
+                className="px-8 py-4 bg-crimson-600 text-white rounded-full font-medium hover:bg-crimson-700 transition-colors shadow-lg hover:shadow-xl"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View My Work
+              </motion.button>
+            </Magnetic>
+            <Magnetic>
             <motion.button
-              onClick={() => scrollToSection('projects')}
-              className="px-8 py-4 bg-crimson-600 text-white rounded-full font-medium hover:bg-crimson-700 transition-colors shadow-lg hover:shadow-xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View My Work
-            </motion.button>
-            <motion.button
-              onClick={() => scrollToSection('contact')}
+              onClick={() => scrollToSection("contact")}
               className="px-8 py-4 bg-white text-crimson-600 border-2 border-crimson-600 rounded-full font-medium hover:bg-crimson-50 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Get In Touch
             </motion.button>
+            </Magnetic>
           </motion.div>
 
           <motion.div
@@ -123,9 +132,15 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.8, repeat: Infinity, repeatType: 'reverse', repeatDelay: 1 }}
+            transition={{
+              duration: 0.6,
+              delay: 0.8,
+              repeat: Infinity,
+              repeatType: "reverse",
+              repeatDelay: 1,
+            }}
             className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
-            onClick={() => scrollToSection('about')}
+            onClick={() => scrollToSection("about")}
           >
             <ArrowDown className="text-crimson-600" size={32} />
           </motion.div>
