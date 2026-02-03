@@ -12,25 +12,25 @@ const Experience = () => {
   const experiences = [
     {
       role: 'Frontend Developer Intern',
-      company: 'TechCorp Solutions',
-      duration: 'November 2025 - August 2026',
+      company: 'Ambispine Technologies pvt. Ltd.',
+      duration: 'November 2025 - January 2026',
       description: 'Developed responsive web applications using React and Tailwind CSS. Collaborated with the design team to implement pixel-perfect UI components and improved website performance by 40%.',
-      skills: ['React', 'JavaScript', 'Tailwind CSS', 'Git'],
+      skills: ['React', 'Next.js','JavaScript', 'Tailwind CSS', 'GitHub'],
     },
     {
-      role: 'Web Development Intern',
-      company: 'Digital Innovations Inc.',
-      duration: 'January 2023 - May 2023',
+      role: 'Web Developer Intern',
+      company: 'Tickyour list',
+      duration: 'March 2025 - June 2025',
       description: 'Built and maintained multiple client websites using HTML, CSS, and JavaScript. Implemented responsive designs and ensured cross-browser compatibility across all projects.',
       skills: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
     },
-    {
-      role: 'MERN Stack Developer',
-      company: 'University Capstone Project',
-      duration: 'August 2023 - December 2023',
-      description: 'Led a team of 4 to develop a full-stack e-commerce platform using the MERN stack. Implemented user authentication, payment integration, and an admin dashboard.',
-      skills: ['MongoDB', 'Express.js', 'React', 'Node.js'],
-    },
+    // {
+    //   role: 'MERN Stack Developer',
+    //   company: 'University Capstone Project',
+    //   duration: 'August 2023 - December 2023',
+    //   description: 'Led a team of 4 to develop a full-stack e-commerce platform using the MERN stack. Implemented user authentication, payment integration, and an admin dashboard.',
+    //   skills: ['MongoDB', 'Express.js', 'React', 'Node.js'],
+    // },
   ];
 
   const containerVariants = {
