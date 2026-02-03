@@ -74,5 +74,9 @@
   "devDependencies": {
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3"
-  }
+  },
+  "resolutions": {
+  "@types/react": "v22.12.0",
+  "@types/react-dom": "v22.12.0" 
+}
 }
