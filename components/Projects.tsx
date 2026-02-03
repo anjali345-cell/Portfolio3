@@ -13,6 +13,18 @@ const Projects = () => {
 
   const projects = [
     {
+      title: "Task Management App",
+      description:
+        "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features. Responsive design for all devices.",
+      image:
+        "https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&w=800",
+      tech: ["Next.js", "TypeScript", "Firebase", "Framer Motion"],
+      github:
+        "https://github.com/anjali345-cell/Task-Management-app---TaskFlow",
+      live: "https://task-management-app-task-flow.vercel.app/",
+      color: "blush",
+    },
+    {
       title: "E-Commerce Platform",
       description:
         "A full-featured e-commerce platform with user authentication, product management, shopping cart, and payment integration. Built with MERN stack and styled with Tailwind CSS.",
@@ -22,17 +34,6 @@ const Projects = () => {
       github: "https://github.com/anjali345-cell/E-commerce-website",
       live: "https://example.com",
       color: "crimson",
-    },
-    {
-      title: "Task Management App",
-      description:
-        "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features. Responsive design for all devices.",
-      image:
-        "https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Next.js", "TypeScript", "Firebase", "Framer Motion"],
-      github: "https://github.com",
-      live: "https://example.com",
-      color: "blush",
     },
     {
       title: "Earthquake Tracker",
