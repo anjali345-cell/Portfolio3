@@ -46,19 +46,20 @@ const Projects = () => {
       live: "https://sample-portfolio-website-1dte.vercel.app/",
       color: "crimson",
     },
+    {
+      title: "E-Commerce Platform",
+      description:
+        "A full-featured e-commerce platform with user authentication, product management, shopping cart, and payment integration. Built with MERN stack and styled with Tailwind CSS.",
+      image:
+        "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+      github: "https://github.com/anjali345-cell/E-commerce-website",
+      live: "https://example.com",
+      color: "crimson",
+    },
+  
   ];
-  {
-    title: "E-Commerce Platform",
-    description:
-      "A full-featured e-commerce platform with user authentication, product management, shopping cart, and payment integration. Built with MERN stack and styled with Tailwind CSS.",
-    image:
-      "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
-    tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
-    github: "https://github.com/anjali345-cell/E-commerce-website",
-    live: "https://example.com",
-    color: "crimson",
-  },
-
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
