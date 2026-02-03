@@ -1,4 +1,5 @@
-[build] = "npx next build"
+[build] 
+command = "npx next build"
 publish = ".next"
 
 [[plugins]]
