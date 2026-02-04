@@ -13,6 +13,17 @@ const Projects = () => {
 
   const projects = [
     {
+      title: "HR Management System",
+      description:
+        "Developed a comprehensive HR Management System using the MERN stack, enabling efficient employee data management, attendance tracking, and performance evaluations. Implemented user authentication and role-based access control to ensure data security. Designed a responsive UI with Tailwind CSS for seamless user experience across devices.",
+      image:
+        "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
+      tech: ["Next.js", "TypeScript", "React", "tailwind css"],
+      github: "https://github.com/anjali345-cell/HR-Management-System",
+      live: "https://bamboo-hr.vercel.app/",
+      color: "green",
+    },
+    {
       title: "Devbuddy AI - AI chatbot for Developers",
       description:
         "Built a production-ready AI chatbot UI inspired by modern chat platforms like ChatGPT and Gemini. Implemented real-time conversational flow using Google Gemini API with proper loading and error states.Designed a responsive, accessible interface with Next.js, TypeScript, and Tailwind CSS, including dark/lightsystem theme support. Developed reusable components, sidebar-based chat layout, and local chat state management for smooth user experience.",
