@@ -13,6 +13,17 @@ const Projects = () => {
 
   const projects = [
     {
+      title: "Devbuddy AI - AI chatbot for Developers",
+      description:
+        "Built a production-ready AI chatbot UI inspired by modern chat platforms like ChatGPT and Gemini. Implemented real-time conversational flow using Google Gemini API with proper loading and error states.Designed a responsive, accessible interface with Next.js, TypeScript, and Tailwind CSS, including dark/lightsystem theme support. Developed reusable components, sidebar-based chat layout, and local chat state management for smooth user experience.",
+      image:
+        "https://i.pinimg.com/474x/12/f9/d0/12f9d07e87ffbd4b9c95699384fca001.jpg",
+      tech: ["React", "Node.js", "Express", "MongoDB"],
+      github: "https://github.com/anjali345-cell/DevBuddy-AI---My-senior-Dev-",
+      live: "https://dev-buddy-ai-my-senior-dev.vercel.app/",
+      color: "B&W",
+    },
+    {
       title: "Task Management App",
       description:
         "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features. Responsive design for all devices.",
@@ -29,7 +40,7 @@ const Projects = () => {
       description:
         "An elegant weather dashboard that displays current weather conditions and forecasts. Features location-based weather data, beautiful visualizations, and responsive design.",
       image:
-        "https://images.unsplash.com/photo-1584291527905-f930791fb1ce?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZWFydGhxdWFrZSUyMHZpc3VhbGlzZXIlMjB3ZWJzaXRlfGVufDB8fDB8fHww",
+        "https://upwwbak.screenrec.com/images/f_jzdfeaYOmr9sX7Kq4ZVy1ASxNUhnHIP3.png",
       tech: ["React", "Weather API", "Chart.js", "CSS3"],
       github: "https://github.com/anjali345-cell/earthquake_visualizer",
       live: "https://earthquake-visualizer-02.netlify.app/",
@@ -47,6 +58,28 @@ const Projects = () => {
       color: "crimson",
     },
     {
+      title: "Portfolio Website 2.0",
+      description:
+        "A modern portfolio website showcasing creative work with smooth animations and transitions. Built with performance and accessibility in mind.",
+      image:
+        "https://i.pinimg.com/736x/79/78/b4/7978b468e0406863250201a384cbf16f.jpg",
+      tech: ["Next.js", "Framer Motion", "Tailwind CSS"],
+      github: "https://github.com/anjali345-cell/Portfolio",
+      live: "https://anjalishrivastava.netlify.app/",
+      color: "crimson",
+    },
+    {
+      title: "Skiper ui clone",
+      description:
+        "A responsive and visually appealing UI clone of the Skiper application with modern design elements and smooth animations.",
+      image:
+        "https://upww.screenrec.com/images/f_WME2hbB75NmJ9gdPFjxL4Dwir0vcZOIG.png",
+      tech: ["React", "Tailwind CSS", "Framer Motion"],
+      github: "https://github.com/anjali345-cell/Skiper-ui-clone",
+      live: "https://skiper-ui-clone.vercel.app/",
+      color: "cinnamon",
+    },
+    {
       title: "E-Commerce Platform",
       description:
         "A full-featured e-commerce platform with user authentication, product management, shopping cart, and payment integration. Built with MERN stack and styled with Tailwind CSS.",
@@ -57,9 +90,20 @@ const Projects = () => {
       live: "https://example.com",
       color: "crimson",
     },
-  
+    {
+      title: "Better mortgage landing page",
+      description:
+        "A responsive and visually appealing landing page for a mortgage company with modern design elements and smooth animations.",
+      image:
+        "https://upww.screenrec.com/images/f_XZMYocHj4v9NwapkUDBe1VxS78g2tQIl.png",
+      tech: ["React", "Tailwind CSS", "Framer Motion"],
+      github: "https://github.com/anjali345-cell/Better.com",
+      live: "https://better-com-henna.vercel.app/home",
+      color: "cinnamon",
+    },
+    
   ];
-  
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
