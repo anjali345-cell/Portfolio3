@@ -24,6 +24,17 @@ const Projects = () => {
       color: "green",
     },
     {
+      title: "AlphaQubit - Quantum Error Decoding",
+      description:
+        "An AI-generated dashboard that summarizes dense research papers and transforms data into interactive charts using Gemini’s coding capabilities.",
+      image:
+        "https://upww.screenrec.com/images/f_B8pfrEieTj65wJvkKZY4Mu0WXIQ2aCDt.png",
+      tech: ["React", "Node.js", "Express", "MongoDB"],
+      github: "https://github.com/anjali345-cell/research-visualization",
+      live: "https://research-visualization-seven.vercel.app/",
+      color: "W&G",
+    },
+    {
       title: "Devbuddy AI - AI chatbot for Developers",
       description:
         "Built a production-ready AI chatbot UI inspired by modern chat platforms like ChatGPT and Gemini. Implemented real-time conversational flow using Google Gemini API with proper loading and error states.Designed a responsive, accessible interface with Next.js, TypeScript, and Tailwind CSS, including dark/lightsystem theme support. Developed reusable components, sidebar-based chat layout, and local chat state management for smooth user experience.",
