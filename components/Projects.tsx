@@ -23,6 +23,17 @@ const Projects = () => {
       live: "https://bamboo-hr.vercel.app/",
       color: "green",
     },
+      {
+      title: "PhiloVibes - OpenBook philosophical books",
+      description:
+        "It's a philosophy-inspired web app where you can explore timeless quotes, reflect on your own thoughts, and sit with ideas for a moment in a world that rarely slows down. The Playground is my favourite part — you write a thought, hit Reflect, and a unique Three.js animation appears every single time. No two reflections look the same.",
+      image:
+        "https://up129in2.screenrec.com/images/f_OYdzXm45QyHEf6kSvVABjbWo1IJUrLa2.png",
+      tech: ["React", "Nextjs", "TailwindCSS", "Threejs animation", "Framer motion"],
+      github: "https://github.com/anjali345-cell/Philo-vibes",
+      live: "https://philo-vibes-6uz9.vercel.app/",
+      color: "W&G",
+    },
     {
       title: "AlphaQubit - Quantum Error Decoding",
       description:
