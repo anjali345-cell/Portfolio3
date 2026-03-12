@@ -13,6 +13,17 @@ const Projects = () => {
 
   const projects = [
     {
+      title: "Job Application Tracker",
+      description:
+        "A full-stack AI-powered job tracker that automates application tracking via Gmail API, keeps users accountable with Telegram reminders, and uses Google Gemini AI for personalized job search advice — built with Next.js, FastAPI, PostgreSQL and deployed on Vercel and Render.",
+      image:
+        "https://upwwbak2.screenrec.com/images/f_HIahJmC56kt7ugoz8vpRQ1qjdBy23UVc.png",
+      tech: ["Next.js", "TypeScript", "React", "tailwind css", "Postgress", "Prisma", "Clerk authentication", "OAuth","Supabase","Python","FastAPI"],
+      github: "https://github.com/anjali345-cell/myjobtracker",
+      live: "https://myjobtrackerapp.vercel.app/",
+      color: "green",
+    },
+    {
       title: "HR Management System",
       description:
         "Developed a comprehensive HR Management System using the MERN stack, enabling efficient employee data management, attendance tracking, and performance evaluations. Implemented user authentication and role-based access control to ensure data security. Designed a responsive UI with Tailwind CSS for seamless user experience across devices.",
