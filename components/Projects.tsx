@@ -12,6 +12,17 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const projects = [
+     {
+      title: "Job Application Tracker Website",
+      description:
+        "A full-stack AI-powered job tracker that automates application tracking via Gmail API, keeps users accountable with Telegram reminders, and uses Google Gemini AI for personalized job search advice — built with Next.js, FastAPI, PostgreSQL and deployed on Vercel and Render.",
+      image:
+        "https://upwwbak2.screenrec.com/images/f_qjP7eF8yAYzWU0tV3J2KZnhvf6OisBTL.png",
+      tech: ["https://builder.peachworlds.com/, 3D Website builder, No-code low-code"],
+      github: "https://github.com/anjali345-cell/myjobtracker",
+      live: "https://glad-1ybrnizwes.peachworlds.com/",
+      color: "green",
+    },
     {
       title: "Job Application Tracker",
       description:
