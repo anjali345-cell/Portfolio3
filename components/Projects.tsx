@@ -53,7 +53,7 @@ const Projects = () => {
         "https://up129in2.screenrec.com/images/f_OYdzXm45QyHEf6kSvVABjbWo1IJUrLa2.png",
       tech: ["React", "Nextjs", "TailwindCSS", "Threejs animation", "Framer motion"],
       github: "https://github.com/anjali345-cell/Philo-vibes",
-      live: "https://philo-vibes-6uz9.vercel.app/",
+      live: "https://readphilosophy.vercel.app/",
       color: "W&G",
     },
     {
