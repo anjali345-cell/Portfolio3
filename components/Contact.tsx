@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Mail, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const ref = useRef(null);
@@ -25,17 +26,39 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
 
       setTimeout(() => {
         setSubmitStatus('idle');
       }, 3000);
-    }, 1500);
+
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants = {
@@ -79,7 +102,7 @@ const Contact = () => {
             <motion.div variants={itemVariants} className="space-y-8">
               <div>
                 <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                 Let&apos;s work together 
+                  Let&apos;s work together
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-8">
                   I&apos;m always interested in hearing about new projects and opportunities.
@@ -237,6 +260,16 @@ const Contact = () => {
                       className="p-4 bg-green-50 text-green-700 rounded-xl text-center"
                     >
                       Message sent successfully! I&apos;ll get back to you soon.
+                    </motion.div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-red-50 text-red-700 rounded-xl text-center"
+                    >
+                      Something went wrong. Please try again.
                     </motion.div>
                   )}
                 </div>
