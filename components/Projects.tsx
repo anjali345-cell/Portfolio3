@@ -1,132 +1,78 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { ExternalLink, Github } from "lucide-react";
-import Image from "next/image";
-import Magnetic from "./ui/magnetic";
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { Mail, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import emailjs from "@emailjs/browser";
 
-const Projects = () => {
+const Contact = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const projects = [
-    {
-      title: "HR Management System",
-      description:
-        "Developed a comprehensive HR Management System using the MERN stack, enabling efficient employee data management, attendance tracking, and performance evaluations. Implemented user authentication and role-based access control to ensure data security. Designed a responsive UI with Tailwind CSS for seamless user experience across devices.",
-      image:
-        "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Next.js", "TypeScript", "React", "tailwind css"],
-      github: "https://github.com/anjali345-cell/HR-Management-System",
-      live: "https://bamboo-hr.vercel.app/",
-      color: "green",
-    },
-    {
-      title: "Devbuddy AI - AI chatbot for Developers",
-      description:
-        "Built a production-ready AI chatbot UI inspired by modern chat platforms like ChatGPT and Gemini. Implemented real-time conversational flow using Google Gemini API with proper loading and error states.Designed a responsive, accessible interface with Next.js, TypeScript, and Tailwind CSS, including dark/lightsystem theme support. Developed reusable components, sidebar-based chat layout, and local chat state management for smooth user experience.",
-      image:
-        "https://i.pinimg.com/474x/12/f9/d0/12f9d07e87ffbd4b9c95699384fca001.jpg",
-      tech: ["React", "Node.js", "Express", "MongoDB"],
-      github: "https://github.com/anjali345-cell/DevBuddy-AI---My-senior-Dev-",
-      live: "https://dev-buddy-ai-my-senior-dev.vercel.app/",
-      color: "B&W",
-    },
-    {
-      title: "Task Management App",
-      description:
-        "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features. Responsive design for all devices.",
-      image:
-        "https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["Next.js", "TypeScript", "Firebase", "Framer Motion"],
-      github:
-        "https://github.com/anjali345-cell/Task-Management-app---TaskFlow",
-      live: "https://task-management-app-task-flow.vercel.app/",
-      color: "blush",
-    },
-    {
-      title: "Earthquake Tracker",
-      description:
-        "An elegant weather dashboard that displays current weather conditions and forecasts. Features location-based weather data, beautiful visualizations, and responsive design.",
-      image:
-        "https://upwwbak.screenrec.com/images/f_jzdfeaYOmr9sX7Kq4ZVy1ASxNUhnHIP3.png",
-      tech: ["React", "Weather API", "Chart.js", "CSS3"],
-      github: "https://github.com/anjali345-cell/earthquake_visualizer",
-      live: "https://earthquake-visualizer-02.netlify.app/",
-      color: "cinnamon",
-    },
-    {
-      title: "Portfolio Website",
-      description:
-        "A modern portfolio website showcasing creative work with smooth animations and transitions. Built with performance and accessibility in mind.",
-      image:
-        "https://i.pinimg.com/736x/a8/70/96/a870963c0aed32ffbe7826f6aeb2794c.jpg",
-      tech: ["Next.js", "Framer Motion", "Tailwind CSS"],
-      github: "https://github.com/anjali345-cell/sample-portfolio-website.git",
-      live: "https://sample-portfolio-website-1dte.vercel.app/",
-      color: "crimson",
-    },
-    {
-      title: "Portfolio Website 2.0",
-      description:
-        "A modern portfolio website showcasing creative work with smooth animations and transitions. Built with performance and accessibility in mind.",
-      image:
-        "https://i.pinimg.com/736x/79/78/b4/7978b468e0406863250201a384cbf16f.jpg",
-      tech: ["Next.js", "Framer Motion", "Tailwind CSS"],
-      github: "https://github.com/anjali345-cell/Portfolio",
-      live: "https://anjalishrivastava.netlify.app/",
-      color: "crimson",
-    },
-    {
-      title: "Skiper ui clone",
-      description:
-        "A responsive and visually appealing UI clone of the Skiper application with modern design elements and smooth animations.",
-      image:
-        "https://upww.screenrec.com/images/f_WME2hbB75NmJ9gdPFjxL4Dwir0vcZOIG.png",
-      tech: ["React", "Tailwind CSS", "Framer Motion"],
-      github: "https://github.com/anjali345-cell/Skiper-ui-clone",
-      live: "https://skiper-ui-clone.vercel.app/",
-      color: "cinnamon",
-    },
-    {
-      title: "E-Commerce Platform",
-      description:
-        "A full-featured e-commerce platform with user authentication, product management, shopping cart, and payment integration. Built with MERN stack and styled with Tailwind CSS.",
-      image:
-        "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tech: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
-      github: "https://github.com/anjali345-cell/E-commerce-website",
-      live: "https://example.com",
-      color: "crimson",
-    },
-    {
-      title: "Better mortgage landing page",
-      description:
-        "A responsive and visually appealing landing page for a mortgage company with modern design elements and smooth animations.",
-      image:
-        "https://upww.screenrec.com/images/f_XZMYocHj4v9NwapkUDBe1VxS78g2tQIl.png",
-      tech: ["React", "Tailwind CSS", "Framer Motion"],
-      github: "https://github.com/anjali345-cell/Better.com",
-      live: "https://better-com-henna.vercel.app/home",
-      color: "cinnamon",
-    },
-    
-  ];
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 3000);
+
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -135,112 +81,205 @@ const Projects = () => {
   };
 
   return (
-    <section
-      id="projects"
-      className="py-20 bg-gradient-to-b from-blush-50 to-white"
-      ref={ref}
-    >
+    <section id="contact" className="py-20 bg-gradient-to-b from-white to-blush-50" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Featured Projects
+              Get In Touch
             </h2>
             <div className="w-20 h-1 bg-crimson-600 mx-auto rounded-full"></div>
             <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              A selection of projects that showcase my skills and creativity
+              Have a project in mind or want to collaborate? Feel free to reach out!
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ y: -10 }}
-                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="relative overflow-hidden aspect-video">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-60"></div>
+          <div className="grid lg:grid-cols-2 gap-12">
+            <motion.div variants={itemVariants} className="space-y-8">
+              <div>
+                <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                  Let&apos;s work together
+                </h3>
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  I&apos;m always interested in hearing about new projects and opportunities.
+                  Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
+                </p>
+              </div>
 
-                  <div className="absolute top-4 right-4 flex gap-2">
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors"
-                    >
-                      <Github size={20} className="text-gray-900" />
-                    </motion.a>
-                    <motion.a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-10 h-10 bg-crimson-600 rounded-full flex items-center justify-center shadow-lg hover:bg-crimson-700 transition-colors"
-                    >
-                      <ExternalLink size={20} className="text-white" />
-                    </motion.a>
+              <div className="space-y-6">
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-center gap-4"
+                >
+                  <div className="w-12 h-12 bg-crimson-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Mail className="text-crimson-600" size={24} />
                   </div>
-                </div>
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Email</p>
+                    <a
+                      href="mailto:anjali.sh93026@gmail.com"
+                      className="text-gray-900 font-medium hover:text-crimson-600 transition-colors"
+                    >
+                      anjali.sh93026@gmail.com
+                    </a>
+                  </div>
+                </motion.div>
 
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-crimson-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className={`px-3 py-1 bg-${project.color}-50 text-${project.color}-700 rounded-full text-sm font-medium`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-center gap-4"
+                >
+                  <div className="w-12 h-12 bg-crimson-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <MapPin className="text-crimson-600" size={24} />
                   </div>
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Location</p>
+                    <p className="text-gray-900 font-medium">MP, India</p>
+                  </div>
+                </motion.div>
+              </div>
+
+              <div>
+                <p className="text-gray-700 font-medium mb-4">Connect with me</p>
+                <div className="flex gap-4">
+                  <motion.a
+                    href="https://github.com/anjali345-cell"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center hover:bg-gray-800 transition-colors shadow-lg"
+                  >
+                    <Github className="text-white" size={24} />
+                  </motion.a>
+                  <motion.a
+                    href="https://www.linkedin.com/in/anjali-s-15187b22a/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors shadow-lg"
+                  >
+                    <Linkedin className="text-white" size={24} />
+                  </motion.a>
+                  <motion.a
+                    href="mailto:anjali.sh93026@gmail.com"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-12 h-12 bg-crimson-600 rounded-xl flex items-center justify-center hover:bg-crimson-700 transition-colors shadow-lg"
+                  >
+                    <Mail className="text-white" size={24} />
+                  </motion.a>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl">
+                <div className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-crimson-500 focus:border-transparent transition-all outline-none"
+                      placeholder="John Doe"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-crimson-500 focus:border-transparent transition-all outline-none"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={5}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-crimson-500 focus:border-transparent transition-all outline-none resize-none"
+                      placeholder="Tell me about your project..."
+                    />
+                  </div>
+
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full px-8 py-4 bg-crimson-600 text-white rounded-xl font-medium hover:bg-crimson-700 transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                          className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                        />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={20} />
+                        Send Message
+                      </>
+                    )}
+                  </motion.button>
+
+                  {submitStatus === 'success' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-green-50 text-green-700 rounded-xl text-center"
+                    >
+                      Message sent successfully! I&apos;ll get back to you soon.
+                    </motion.div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-red-50 text-red-700 rounded-xl text-center"
+                    >
+                      Something went wrong. Please try again.
+                    </motion.div>
+                  )}
+                </div>
+              </form>
+            </motion.div>
           </div>
-
-          <motion.div variants={itemVariants} className="mt-12 text-center">
-            <p className="text-gray-600 mb-6">
-              Want to see more? Check out my GitHub for additional projects and
-              contributions.
-            </p>
-            <Magnetic>
-              <motion.a
-                href="https://github.com/anjali345-cell"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors shadow-lg"
-              >
-                <Github size={20} />
-                View More on GitHub
-              </motion.a>
-            </Magnetic>
-          </motion.div>
         </motion.div>
       </div>
     </section>
   );
 };
 
-export default Projects;
+export default Contact;

@@ -1,22 +1,27 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { Mail, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { Mail, MapPin, Send, Github, Linkedin,  X } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -25,17 +30,38 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      );
+
+      setSubmitStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
 
       setTimeout(() => {
-        setSubmitStatus('idle');
+        setSubmitStatus("idle");
       }, 3000);
-    }, 1500);
+    } catch (error) {
+      console.error(error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants = {
@@ -58,11 +84,15 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-white to-blush-50" ref={ref}>
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-b from-white to-blush-50"
+      ref={ref}
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
@@ -71,7 +101,8 @@ const Contact = () => {
             </h2>
             <div className="w-20 h-1 bg-crimson-600 mx-auto rounded-full"></div>
             <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              Have a project in mind or want to collaborate? Feel free to reach out!
+              Have a project in mind or want to collaborate? Feel free to reach
+              out!
             </p>
           </motion.div>
 
@@ -79,11 +110,12 @@ const Contact = () => {
             <motion.div variants={itemVariants} className="space-y-8">
               <div>
                 <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                 Let&apos;s work together 
+                  Let&apos;s work together
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  I&apos;m always interested in hearing about new projects and opportunities.
-                  Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
+                  I&apos;m always interested in hearing about new projects and
+                  opportunities. Whether you have a question or just want to say
+                  hi, I&apos;ll try my best to get back to you!
                 </p>
               </div>
 
@@ -121,7 +153,9 @@ const Contact = () => {
               </div>
 
               <div>
-                <p className="text-gray-700 font-medium mb-4">Connect with me</p>
+                <p className="text-gray-700 font-medium mb-4">
+                  Connect with me
+                </p>
                 <div className="flex gap-4">
                   <motion.a
                     href="https://github.com/anjali345-cell"
@@ -151,15 +185,29 @@ const Contact = () => {
                   >
                     <Mail className="text-white" size={24} />
                   </motion.a>
+                  <motion.a
+                    href="https://x.com/anjali63664"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-12 h-12 bg-blue-400 rounded-xl flex items-center justify-center hover:bg-blue-500 transition-colors shadow-lg"
+                  >
+                    <X className="text-white" size={24} />
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl">
+              <form
+                onSubmit={handleSubmit}
+                className="bg-white p-8 rounded-2xl shadow-xl"
+              >
                 <div className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Your Name
                     </label>
                     <input
@@ -175,7 +223,10 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Your Email
                     </label>
                     <input
@@ -191,7 +242,10 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Your Message
                     </label>
                     <textarea
@@ -217,7 +271,11 @@ const Contact = () => {
                       <>
                         <motion.div
                           animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                          transition={{
+                            duration: 1,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
                           className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                         />
                         Sending...
@@ -230,13 +288,22 @@ const Contact = () => {
                     )}
                   </motion.button>
 
-                  {submitStatus === 'success' && (
+                  {submitStatus === "success" && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="p-4 bg-green-50 text-green-700 rounded-xl text-center"
                     >
                       Message sent successfully! I&apos;ll get back to you soon.
+                    </motion.div>
+                  )}
+                  {submitStatus === "error" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-red-50 text-red-700 rounded-xl text-center"
+                    >
+                      Something went wrong. Please try again.
                     </motion.div>
                   )}
                 </div>
