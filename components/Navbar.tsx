@@ -9,16 +9,29 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
 
-      const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+      const sections = [
+        'home',
+        'about',
+        'experience',
+        'skills',
+        'projects',
+        'contact',
+      ];
+
+      const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
         const element = document.getElementById(section);
+
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(section);
             break;
           }
@@ -27,19 +40,22 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
+
     if (element) {
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - offset;
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
@@ -55,51 +71,77 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 backdrop-blur-md shadow-md' : 'bg-transparent'
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'backdrop-blur-xl bg-[#F7F3EE]/80 border-b border-[#E5D8C9]'
+          : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="h-24 flex items-center justify-between">
+          {/* LOGO */}
           <motion.button
             onClick={() => scrollToSection('home')}
-            className="text-2xl font-bold text-crimson-600 hover:text-crimson-700 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.96 }}
+            className="text-[2rem] font-semibold tracking-tight text-[#2B1D16]"
+            style={{
+              fontFamily: 'var(--font-cormorant)',
+            }}
           >
-            Anjali
+            Anjali<span className="text-[#A66A3F]">.</span>
           </motion.button>
 
-          <div className="hidden md:flex items-center space-x-1">
+          {/* NAV LINKS */}
+          <div className="hidden md:flex items-center gap-2">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors relative ${
+                className={`relative px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300 ${
                   activeSection === item.id
-                    ? 'text-crimson-600'
-                    : 'text-gray-700 hover:text-crimson-600'
+                    ? 'text-[#4B2E1E]'
+                    : 'text-[#6F6258] hover:text-[#A66A3F]'
                 }`}
               >
-                {item.label}
                 {activeSection === item.id && (
                   <motion.div
-                    layoutId="activeSection"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-crimson-600"
-                    initial={false}
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    layoutId="navbar-active-pill"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 350,
+                      damping: 28,
+                    }}
+                    className="absolute inset-0 rounded-full bg-[#EFE7DD]"
                   />
                 )}
+
+                <span className="relative z-10">
+                  {item.label}
+                </span>
               </button>
             ))}
           </div>
 
+          {/* CTA BUTTON */}
+          <motion.button
+            onClick={() => scrollToSection('contact')}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.96 }}
+            className="hidden md:flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#4B2E1E] text-[#FFFDFC] text-sm font-medium shadow-[0_10px_30px_rgba(75,46,30,0.18)] hover:bg-[#3A2417] transition-all duration-300"
+          >
+            Let's Talk
+            <span className="text-base">↗</span>
+          </motion.button>
+
+          {/* MOBILE BUTTON */}
           <div className="md:hidden">
             <button
               onClick={() => scrollToSection('contact')}
-              className="px-4 py-2 bg-crimson-600 text-white rounded-lg text-sm font-medium hover:bg-crimson-700 transition-colors"
+              className="px-5 py-2.5 rounded-xl bg-[#4B2E1E] text-white text-sm font-medium"
             >
               Contact
             </button>

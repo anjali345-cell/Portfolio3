@@ -3,18 +3,21 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, MapPin, Send, Github, Linkedin,  X } from "lucide-react";
+import { Mail, MapPin, Send, Github, Linkedin, X } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
@@ -47,6 +50,7 @@ const Contact = () => {
       );
 
       setSubmitStatus("success");
+
       setFormData({
         name: "",
         email: "",
@@ -66,19 +70,23 @@ const Contact = () => {
 
   const containerVariants = {
     hidden: { opacity: 0 },
+
     visible: {
       opacity: 1,
+
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
+
     visible: {
       opacity: 1,
       y: 0,
+
       transition: { duration: 0.6 },
     },
   };
@@ -86,52 +94,69 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-b from-white to-blush-50"
       ref={ref}
+      className="relative py-28 bg-[#F7F3EE] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      {/* background glow */}
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#EFE3D3] rounded-full blur-3xl opacity-50" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Get In Touch
+          {/* HEADER */}
+          <motion.div variants={itemVariants} className="text-center mb-20">
+            <p className="uppercase tracking-[0.25em] text-sm text-[#A66A3F] mb-4">
+              Contact
+            </p>
+
+            <h2
+              className="text-5xl md:text-6xl text-[#2B1D16] mb-6"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              Let’s Create Something
             </h2>
-            <div className="w-20 h-1 bg-crimson-600 mx-auto rounded-full"></div>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              Have a project in mind or want to collaborate? Feel free to reach
-              out!
+
+            <p className="text-[#6F6258] max-w-2xl mx-auto leading-8">
+              Whether it’s a freelance project, collaboration, or just a simple
+              hello — my inbox is always open.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            <motion.div variants={itemVariants} className="space-y-8">
+          {/* GRID */}
+          <div className="grid lg:grid-cols-2 gap-14 items-start">
+            {/* LEFT SIDE */}
+            <motion.div variants={itemVariants} className="space-y-10">
               <div>
-                <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                  Let&apos;s work together
+                <h3 className="text-4xl text-[#2B1D16] mb-6 font-semibold">
+                  Let’s work together
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                  I&apos;m always interested in hearing about new projects and
-                  opportunities. Whether you have a question or just want to say
-                  hi, I&apos;ll try my best to get back to you!
+
+                <p className="text-[#6F6258] leading-8 text-lg">
+                  I love building thoughtful digital experiences with clean UI,
+                  smooth interactions, and meaningful design. If you have an
+                  idea in mind, I’d genuinely love to hear about it.
                 </p>
               </div>
 
+              {/* CONTACT INFO */}
               <div className="space-y-6">
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-4"
+                  className="flex items-center gap-5 bg-[#FFFDFC] border border-[#E5D8C9] rounded-2xl p-5"
                 >
-                  <div className="w-12 h-12 bg-crimson-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Mail className="text-crimson-600" size={24} />
+                  <div className="w-14 h-14 rounded-2xl bg-[#EFE7DD] flex items-center justify-center">
+                    <Mail className="text-[#4B2E1E]" size={24} />
                   </div>
+
                   <div>
-                    <p className="text-sm text-gray-500 mb-1">Email</p>
+                    <p className="text-sm text-[#A08B7B] mb-1">Email</p>
+
                     <a
                       href="mailto:anjali.sh93026@gmail.com"
-                      className="text-gray-900 font-medium hover:text-crimson-600 transition-colors"
+                      className="text-[#2B1D16] font-medium hover:text-[#A66A3F] transition-colors"
                     >
                       anjali.sh93026@gmail.com
                     </a>
@@ -140,76 +165,77 @@ const Contact = () => {
 
                 <motion.div
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-4"
+                  className="flex items-center gap-5 bg-[#FFFDFC] border border-[#E5D8C9] rounded-2xl p-5"
                 >
-                  <div className="w-12 h-12 bg-crimson-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-crimson-600" size={24} />
+                  <div className="w-14 h-14 rounded-2xl bg-[#EFE7DD] flex items-center justify-center">
+                    <MapPin className="text-[#4B2E1E]" size={24} />
                   </div>
+
                   <div>
-                    <p className="text-sm text-gray-500 mb-1">Location</p>
-                    <p className="text-gray-900 font-medium">MP, India</p>
+                    <p className="text-sm text-[#A08B7B] mb-1">Location</p>
+
+                    <p className="text-[#2B1D16] font-medium">India</p>
                   </div>
                 </motion.div>
               </div>
 
+              {/* SOCIALS */}
               <div>
-                <p className="text-gray-700 font-medium mb-4">
-                  Connect with me
+                <p className="text-[#2B1D16] font-medium mb-5">
+                  Find me online
                 </p>
+
                 <div className="flex gap-4">
-                  <motion.a
-                    href="https://github.com/anjali345-cell"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center hover:bg-gray-800 transition-colors shadow-lg"
-                  >
-                    <Github className="text-white" size={24} />
-                  </motion.a>
-                  <motion.a
-                    href="https://www.linkedin.com/in/anjali-s-15187b22a/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors shadow-lg"
-                  >
-                    <Linkedin className="text-white" size={24} />
-                  </motion.a>
-                  <motion.a
-                    href="mailto:anjali.sh93026@gmail.com"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 bg-crimson-600 rounded-xl flex items-center justify-center hover:bg-crimson-700 transition-colors shadow-lg"
-                  >
-                    <Mail className="text-white" size={24} />
-                  </motion.a>
-                  <motion.a
-                    href="https://x.com/anjali63664"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 bg-blue-400 rounded-xl flex items-center justify-center hover:bg-blue-500 transition-colors shadow-lg"
-                  >
-                    <X className="text-white" size={24} />
-                  </motion.a>
+                  {[
+                    {
+                      href: "https://github.com/anjali345-cell",
+                      icon: Github,
+                    },
+                    {
+                      href:
+                        "https://www.linkedin.com/in/anjali-s-15187b22a/",
+                      icon: Linkedin,
+                    },
+                    {
+                      href: "mailto:anjali.sh93026@gmail.com",
+                      icon: Mail,
+                    },
+                    {
+                      href: "https://x.com/anjali63664",
+                      icon: X,
+                    },
+                  ].map((social, index) => {
+                    const Icon = social.icon;
+
+                    return (
+                      <motion.a
+                        key={index}
+                        href={social.href}
+                        target="_blank"
+                        whileHover={{ y: -4 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-14 h-14 rounded-2xl bg-[#FFFDFC] border border-[#E5D8C9] flex items-center justify-center shadow-sm hover:shadow-lg transition-all"
+                      >
+                        <Icon className="text-[#4B2E1E]" size={22} />
+                      </motion.a>
+                    );
+                  })}
                 </div>
               </div>
             </motion.div>
 
+            {/* RIGHT SIDE FORM */}
             <motion.div variants={itemVariants}>
               <form
                 onSubmit={handleSubmit}
-                className="bg-white p-8 rounded-2xl shadow-xl"
+                className="bg-[#FFFDFC] border border-[#E5D8C9] rounded-[32px] p-8 md:p-10 shadow-[0_10px_50px_rgba(75,46,30,0.06)]"
               >
-                <div className="space-y-6">
+                <div className="space-y-7">
                   <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
+                    <label className="block text-sm text-[#6F6258] mb-3">
                       Your Name
                     </label>
+
                     <input
                       type="text"
                       id="name"
@@ -217,18 +243,16 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-crimson-500 focus:border-transparent transition-all outline-none"
                       placeholder="John Doe"
+                      className="w-full px-5 py-4 rounded-2xl bg-[#F7F3EE] border border-[#E5D8C9] text-[#2B1D16] placeholder:text-[#B5A79B] outline-none focus:border-[#A66A3F] transition-all"
                     />
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
+                    <label className="block text-sm text-[#6F6258] mb-3">
                       Your Email
                     </label>
+
                     <input
                       type="email"
                       id="email"
@@ -236,36 +260,35 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-crimson-500 focus:border-transparent transition-all outline-none"
                       placeholder="john@example.com"
+                      className="w-full px-5 py-4 rounded-2xl bg-[#F7F3EE] border border-[#E5D8C9] text-[#2B1D16] placeholder:text-[#B5A79B] outline-none focus:border-[#A66A3F] transition-all"
                     />
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
+                    <label className="block text-sm text-[#6F6258] mb-3">
                       Your Message
                     </label>
+
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      rows={5}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-crimson-500 focus:border-transparent transition-all outline-none resize-none"
+                      rows={6}
                       placeholder="Tell me about your project..."
+                      className="w-full px-5 py-4 rounded-2xl bg-[#F7F3EE] border border-[#E5D8C9] text-[#2B1D16] placeholder:text-[#B5A79B] outline-none focus:border-[#A66A3F] transition-all resize-none"
                     />
                   </div>
 
+                  {/* BUTTON */}
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full px-8 py-4 bg-crimson-600 text-white rounded-xl font-medium hover:bg-crimson-700 transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-4 rounded-2xl bg-[#4B2E1E] text-white font-medium shadow-[0_10px_30px_rgba(75,46,30,0.18)] hover:bg-[#3A2417] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
@@ -278,30 +301,34 @@ const Contact = () => {
                           }}
                           className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                         />
+
                         Sending...
                       </>
                     ) : (
                       <>
-                        <Send size={20} />
+                        <Send size={18} />
                         Send Message
                       </>
                     )}
                   </motion.button>
 
+                  {/* SUCCESS */}
                   {submitStatus === "success" && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-4 bg-green-50 text-green-700 rounded-xl text-center"
+                      className="p-4 rounded-2xl bg-[#E8F5E9] text-[#2E7D32] text-center"
                     >
-                      Message sent successfully! I&apos;ll get back to you soon.
+                      Message sent successfully ✨
                     </motion.div>
                   )}
+
+                  {/* ERROR */}
                   {submitStatus === "error" && (
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-4 bg-red-50 text-red-700 rounded-xl text-center"
+                      className="p-4 rounded-2xl bg-[#FDECEC] text-[#C62828] text-center"
                     >
                       Something went wrong. Please try again.
                     </motion.div>

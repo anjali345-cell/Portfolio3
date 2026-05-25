@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ExternalLink, Github } from "lucide-react";
-import Image from "next/image";
 import Magnetic from "./ui/magnetic";
 
 const Projects = () => {
@@ -163,9 +162,7 @@ const Projects = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
+      transition: { staggerChildren: 0.12 },
     },
   };
 
@@ -181,77 +178,97 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-20 bg-gradient-to-b from-blush-50 to-white"
       ref={ref}
+      className="relative py-28 bg-[#F7F3EE] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      {/* background glow */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#EFE3D3] blur-3xl rounded-full opacity-50" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          {/* HEADER */}
+          <motion.div variants={itemVariants} className="text-center mb-20">
+            <p className="uppercase tracking-[0.25em] text-sm text-[#A66A3F] mb-4">
+              My Work
+            </p>
+
+            <h2
+              className="text-5xl md:text-6xl text-[#2B1D16] mb-6"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
               Featured Projects
             </h2>
-            <div className="w-20 h-1 bg-crimson-600 mx-auto rounded-full"></div>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              A selection of projects that showcase my skills and creativity
+
+            <p className="text-[#6F6258] max-w-2xl mx-auto leading-8">
+              A collection of things I’ve built while exploring frontend, backend,
+              and creative UI systems.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          {/* GRID */}
+          <div className="grid md:grid-cols-2 gap-10">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -10 }}
-                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+                whileHover={{ y: -6 }}
+                className="group bg-[#FFFDFC] border border-[#E5D8C9] rounded-[30px] overflow-hidden shadow-[0_10px_50px_rgba(75,46,30,0.05)] transition-all duration-300"
               >
-                <div className="relative overflow-hidden aspect-video">
+                {/* IMAGE */}
+                <div className="relative aspect-video overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-60"></div>
 
-                  <div className="absolute top-4 right-4 flex gap-2">
+                  {/* overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2B1D16]/70 via-[#2B1D16]/20 to-transparent" />
+
+                  {/* ACTION BUTTONS */}
+                  <div className="absolute top-5 right-5 flex gap-3">
                     <motion.a
                       href={project.github}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-11 h-11 rounded-xl bg-[#FFFDFC]/90 backdrop-blur-md flex items-center justify-center border border-[#E5D8C9]"
                     >
-                      <Github size={20} className="text-gray-900" />
+                      <Github size={18} className="text-[#2B1D16]" />
                     </motion.a>
+
                     <motion.a
                       href={project.live}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-10 h-10 bg-crimson-600 rounded-full flex items-center justify-center shadow-lg hover:bg-crimson-700 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-11 h-11 rounded-xl bg-[#4B2E1E] flex items-center justify-center shadow-lg"
                     >
-                      <ExternalLink size={20} className="text-white" />
+                      <ExternalLink size={18} className="text-white" />
                     </motion.a>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-crimson-600 transition-colors">
+                {/* CONTENT */}
+                <div className="p-8">
+                  <h3 className="text-2xl font-semibold text-[#2B1D16] mb-4 group-hover:text-[#A66A3F] transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
+
+                  <p className="text-[#6F6258] leading-8 mb-6">
                     {project.description}
                   </p>
+
+                  {/* TECH STACK */}
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className={`px-3 py-1 bg-${project.color}-50 text-${project.color}-700 rounded-full text-sm font-medium`}
+                        className="px-4 py-2 rounded-full text-sm bg-[#EFE7DD] text-[#4B2E1E] border border-[#E5D8C9]"
                       >
                         {tech}
                       </span>
@@ -262,22 +279,22 @@ const Projects = () => {
             ))}
           </div>
 
-          <motion.div variants={itemVariants} className="mt-12 text-center">
-            <p className="text-gray-600 mb-6">
-              Want to see more? Check out my GitHub for additional projects and
-              contributions.
+          {/* FOOTER CTA */}
+          <motion.div variants={itemVariants} className="mt-20 text-center">
+            <p className="text-[#6F6258] mb-6">
+              More projects live on GitHub
             </p>
+
             <Magnetic>
               <motion.a
                 href="https://github.com/anjali345-cell"
                 target="_blank"
-                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors shadow-lg"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#4B2E1E] text-white shadow-[0_10px_30px_rgba(75,46,30,0.18)] hover:bg-[#3A2417] transition-all"
               >
-                <Github size={20} />
-                View More on GitHub
+                <Github size={18} />
+                View GitHub
               </motion.a>
             </Magnetic>
           </motion.div>
