@@ -7,7 +7,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/ui/reveal";
 import Skills from "@/components/Skills";
-import { Skiper31 } from "@/components/ui/skiper-ui/skiper31";
+import Bookshelf from "@/components/Bookshelf";
 
 export default function Home() {
   return (
@@ -27,6 +27,9 @@ export default function Home() {
       </Reveal>
       <Reveal direction="right">
         <Projects />
+      </Reveal>
+      <Reveal direction="up">
+        <Bookshelf />
       </Reveal>
       <Contact />
       <Footer />
